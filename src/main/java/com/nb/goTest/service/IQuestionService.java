@@ -8,9 +8,9 @@ import reactor.core.publisher.Mono;
  * This interface outlines teh methods required for teh question service.
  * This service will help the users to add, update and remove the questions.
  */
-public interface IQuestion {
+public interface IQuestionService {
 
-    public Mono<Question> add(Question question);
+    public Mono<Question> add(Question question, String instructorId);
 
     public Flux<Question> fetchByDifficulty(String difficulty);
 
@@ -18,4 +18,5 @@ public interface IQuestion {
 
     public Flux<Question> fetchByInstructor(String instructorId);
 
+    public Flux<Question> findAll();
 }
