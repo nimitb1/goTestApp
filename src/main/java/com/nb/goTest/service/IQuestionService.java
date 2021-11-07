@@ -14,8 +14,6 @@ public interface IQuestionService {
 
     public Flux<Question> fetchByDifficulty(String difficulty);
 
-    public Flux<Question> fetchByType(String type);
-
     public Flux<Question> fetchByInstructor(String instructorId);
 
     public Flux<Question> findAll();

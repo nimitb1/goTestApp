@@ -46,13 +46,8 @@ public class QuestionService implements IQuestionService {
     }
 
     @Override
-    public Flux<Question> fetchByType(String type) {
-        return null;
-    }
-
-    @Override
     public Flux<Question> fetchByInstructor(String instructorId) {
-        return null;
+        return questionRepository.findByInstructor(instructorId);
     }
 
     @Override

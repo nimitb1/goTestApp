@@ -16,7 +16,7 @@ public interface IUserService {
 
     public Flux<User> getUserByType(String typeOfUser);
 
-    public Mono<String> updateUser(User user);
+    public Mono<User> updateUser(User user);
 
     public Mono<String> changeActiveStatus(String userId, String status);
 

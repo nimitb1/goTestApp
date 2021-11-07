@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * TODO: Need to sanitize the input
  */
@@ -16,23 +19,20 @@ import reactor.core.publisher.Mono;
 @Service
 public class UserService implements IUserService {
 
+    //regex to validate the email
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    //regex to validate the phone number\
+    public static final Pattern VALID_PHONE_NUMBER_REGEX =
+            Pattern.compile("\\d*");
+
     @Autowired
     UserRepository userRepository;
 
     @Override
     public Mono<User> addUser(User user) {
-//        boolean isError = false;
-//        try {
-//            validateInput(user);
-            return userRepository.save(user);
-//        } catch (IllegalArgumentException iae) {
-//            log.error("An error occurred while adding the user: " + iae.getMessage() );
-//            isError = true;
-//        }
-//        if(isError) {
-//            return Mono.just("Unable to add the user");
-//        }
-//        return Mono.just("User Added Successfully");
+        validateInput(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -46,19 +46,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Mono<String> updateUser(User user) {
-        boolean isError = false;
-        try {
-            validateInput(user);
-            userRepository.save(user);
-        } catch (IllegalArgumentException iae) {
-            log.error("An error occurred while updating the user: " + iae.getMessage() );
-            isError = true;
-        }
-        if(isError) {
-            return Mono.just("Unable to update the user");
-        }
-        return Mono.just("User updated Successfully");
+    public Mono<User> updateUser(User user) {
+        validateInput(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -70,8 +60,19 @@ public class UserService implements IUserService {
      *  Method to validate the incoming data for the user
      */
     private void validateInput(User user) {
+        //The name should not be blank
         if(user.getName().isBlank()) {
             throw new IllegalArgumentException("Name cannot be blank");
+        }
+        //Validate the email
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(user.getEmail());
+        if(!matcher.find()) {
+            throw new IllegalArgumentException("Enter the valid email address");
+        }
+        //validate phone number
+        matcher = VALID_PHONE_NUMBER_REGEX.matcher(user.getPhoneNumber());
+        if(!matcher.find() || user.getPhoneNumber().length() != 10) {
+            throw new IllegalArgumentException("Enter valid 10 digit mobile number");
         }
     }
 }

@@ -23,4 +23,9 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @PutMapping("/update/{id}")
+    public Mono<User> updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
 }

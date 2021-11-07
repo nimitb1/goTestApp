@@ -19,7 +19,6 @@ public class Question {
     private String[] options = new String[4];
     private String correctOption;
     private String difficulty;
-    private String type;
     private String subject;
     private String instructorId;
 }
