@@ -2,8 +2,8 @@ package com.nb.goTest.service;
 
 import com.nb.goTest.entity.DbSequence;
 import com.nb.goTest.entity.Question;
-import com.nb.goTest.repo.DbSequenceRepository;
-import com.nb.goTest.repo.QuestionRepository;
+import com.nb.goTest.repository.DbSequenceRepository;
+import com.nb.goTest.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

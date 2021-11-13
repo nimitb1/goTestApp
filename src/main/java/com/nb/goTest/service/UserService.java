@@ -1,7 +1,7 @@
 package com.nb.goTest.service;
 
 import com.nb.goTest.entity.User;
-import com.nb.goTest.repo.UserRepository;
+import com.nb.goTest.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

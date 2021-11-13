@@ -1,11 +1,9 @@
-package com.nb.goTest.repo;
+package com.nb.goTest.repository;
 
 import com.nb.goTest.entity.Question;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
-
-import java.util.List;
 
 public interface QuestionRepository extends ReactiveMongoRepository<Question, Integer> {
 
